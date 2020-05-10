@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="/jquery-3.5.0.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var url="/seller/showgzq";
+            var args = "";
+            $.post(url,args,function (data) {
+                $("#message").text(data);
+            })
+        });
+    </script>
+</head>
+<body>
+<span id="message"></span>
+</body>
+</html>

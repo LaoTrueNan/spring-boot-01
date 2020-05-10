@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>注册</title>
+    <link href="/bootstrap1.css" rel="stylesheet">
+    <script type="text/javascript" src="jquery-3.5.0.min.js"></script>
+    <script type="text/javascript" src="/js/regiControl.js"> </script>
+</head>
+<body>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-4 column">
+        </div>
+        <div class="col-md-4 column">
+            <div class="page-header">
+                <h2>请输入您的信息</h2>
+            </div>
+            <form class="myForm" action="/welcome/regi" method="post">
+                <div class="form-group">
+                    <label>用户名（仅英文字符）</label>
+                    <input type="text" class="form-control" autocomplete="off" name="username"/>
+                    <span id="message1"></span>
+                </div>
+                <div class="form-group">
+                    <label>密码</label>
+                    <input type="password" class="form-control" autocomplete="off" name="password"/>
+                    <span id="message2"></span>
+                </div>
+                <div class="form-group">
+                    <label>确认密码</label>
+                    <input type="password" class="form-control" autocomplete="off" name="confirmPas"/>
+                    <span id="message3"></span>
+                </div>
+                <div class="form-group">
+                    <label>管理员ID（6-30位纯数字）</label>
+                    <input type="text" class="form-control" autocomplete="off" name="openid"/>
+                    <span id="message4"></span>
+                </div>
+                <button type="button" class="btn btn-default">提交注册</button>
+            </form>
+        </div>
+        <div class="col-md-4 column">
+        </div>
+    </div>
+</div>
+</body>
+</html>
