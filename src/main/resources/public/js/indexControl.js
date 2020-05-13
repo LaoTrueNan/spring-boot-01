@@ -1,5 +1,10 @@
 $(function () {
 
+    function refocus(e1,e2) {
+        e1.focus(function () {
+            e2.text("");
+        })
+    }
     $("input[name='username']").blur(function () {
         if($("input[name='username']").val()==""){
             $("#message1").text("用户名不能为空！");
@@ -11,9 +16,7 @@ $(function () {
             }
     });
 
-    $("input[name='username']").focus(function () {
-        $("#message1").text("");
-    });
+    refocus($("input[name='username']"),$("#message1"));
 
     $("input[name='password']").blur(function () {
         if($("input[name='password']").val()==""){
@@ -23,9 +26,7 @@ $(function () {
         }
     });
 
-    $("input[name='password']").focus(function () {
-        $("#message2").text("");
-    });
+    refocus($("input[name='password']"),$("#message2"));
 
     $("button").bind('click',function(){
         if($("#message1").text()!=""||$("#message2").text()!=""){
