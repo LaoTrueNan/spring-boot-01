@@ -1,4 +1,7 @@
 package gzq.upc.controller;
+/**
+ * 郭志强
+ */
 
 import gzq.upc.dataobject.SellerInfo;
 import gzq.upc.form.SellerForm;
@@ -6,13 +9,10 @@ import gzq.upc.repository.SellerInfoRepository;
 import gzq.upc.repository.SellerRepository;
 import gzq.upc.service.LoginService;
 import gzq.upc.utils.IntUtil;
-import gzq.upc.utils.KeyUtil;
 import gzq.upc.utils.gzqCookie;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -58,7 +58,8 @@ public class LoginController {
         map.put("msg",result);
         if(result.equals("Success")) {
             SellerInfo sellerInfo = new SellerInfo();
-            form.setId(IntUtil.genUniqueKey());
+            //新注册的管理员没有id，这里设置成随机数
+            form.setId(IntUtil.getUniqueKey());
             BeanUtils.copyProperties(form, sellerInfo);
             repository.save(sellerInfo);
             map.put("url", "/");

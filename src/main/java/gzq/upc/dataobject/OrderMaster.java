@@ -41,5 +41,7 @@ public class OrderMaster {
 
     private Date createTime;
 
+    private Integer supermarket;
+
     private Date updateTime;
 }

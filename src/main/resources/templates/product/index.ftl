@@ -24,7 +24,7 @@
                          </div>
                          <div class="form-group">
                                 <label>图片</label>
-                             <input id="productIcon" name="productIcon" type="text" value="${(productInfo.productIcon)!''}"/>
+                             <input id="productIcon" name="productIcon" type="text" value="${(productInfo.productIcon)!''}" autocomplete="off"/>
 
                              <div class="file-loading">
                                  <p class="help-block">请输入新图片链接或覆盖原有链接</p>

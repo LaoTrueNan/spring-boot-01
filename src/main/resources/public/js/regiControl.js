@@ -1,4 +1,11 @@
 $(function () {
+
+    function refocus(e1,e2) {
+        e1.focus(function () {
+            e2.text("");
+        })
+    }
+
     $("input[name='username']").blur(function () {
         if($("input[name='username']").val()==""){
             $("#message1").text("用户名不能为空！");
@@ -9,10 +16,7 @@ $(function () {
             }
         }
     });
-
-    $("input[name='username']").focus(function () {
-        $("#message1").text("");
-    });
+    refocus($("input[name='username']"),$("#message1"));
 
     $("input[name='password']").blur(function () {
         if($("input[name='password']").val()==""){
@@ -22,9 +26,7 @@ $(function () {
         }
     });
 
-    $("input[name='password']").focus(function () {
-        $("#message2").text("");
-    });
+    refocus($("input[name='password']"),$("#message2"));
 
     $("input[name='confirmPas']").blur(function () {
         if($("input[name='password']").val()!=$(this).val()){
@@ -34,9 +36,7 @@ $(function () {
         }
     });
 
-    $("input[name='confirmPas']").focus(function () {
-        $("#message3").text("");
-    });
+    refocus($("input[name='confirmPas']"),$("#message3"));
 
     $("input[name='openId']").blur(function () {
        if($(this).val()==""){
@@ -51,9 +51,7 @@ $(function () {
        }
     });
 
-    $("input[name='openId']").focus(function () {
-        $("#message4").text("");
-    });
+    refocus($("input[name='openId']"),$("#message4"));
 
     $("button").bind('click',function(){
         if($("#message1").text()!=""||$("#message2").text()!=""||$("#message3").text()!=""||$("#message4").text()!=""){

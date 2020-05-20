@@ -13,6 +13,7 @@ public interface CategoryService {
 
     ProductCategory save(ProductCategory productCategory);
 
+    ProductCategory delete(ProductCategory productCategory);
 
 
 }

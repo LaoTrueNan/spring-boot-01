@@ -4,11 +4,13 @@ import lombok.Data;
 
 @Data
 public class SellerForm {
-    private String sellerId;
+    private Integer id;
 
     private String username;
 
     private String password;
 
     private String openid;
+
+
 }

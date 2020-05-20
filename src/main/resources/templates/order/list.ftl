@@ -35,7 +35,11 @@
                                 <td>${orderDTO.createTime}</td>
                                 <td><a href="/seller/order/detail?orderId=${orderDTO.orderId}">详情</a></td>
 
-                                <td><#if orderDTO.getOrderStatus()!=2><a href="/seller/order/cancel?orderId=${orderDTO.orderId}">取消</a></#if></td>
+                                <td>
+                                    <#if orderDTO.getOrderStatus()==0><a href="/seller/order/distri?orderId=${orderDTO.orderId}">发布</a>
+                                    <#else><span disabled="true" style="color: #CCCCCC">不可用</span>
+                                    </#if>
+                                </td>
 
                             </tr>
                             </#list>

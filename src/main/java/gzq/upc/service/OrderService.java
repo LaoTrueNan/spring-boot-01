@@ -1,11 +1,9 @@
 package gzq.upc.service;
 
-import gzq.upc.dataobject.OrderMaster;
+
 import gzq.upc.dto.OrderDTO;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 public interface OrderService {
@@ -15,7 +13,7 @@ public interface OrderService {
     OrderDTO findOne(String orderId);
 
     /** 查询订单列表. */
-    Page<OrderDTO> findList(String buyerOpenid, Pageable pageable);
+    Page<OrderDTO> findList(Integer supermarket, Pageable pageable);
 
     /** 取消订单. */
     OrderDTO cancel(OrderDTO orderDTO);
@@ -28,4 +26,7 @@ public interface OrderService {
 
     /** 卖家查询订单列表. */
     Page<OrderDTO> findList(Pageable pageable);
+
+    /** 卖家发布新订单*/
+    OrderDTO distribute(OrderDTO orderDTO);
 }

@@ -6,15 +6,21 @@
     <script type="text/javascript" src="/jquery-3.5.0.min.js"></script>
     <script type="text/javascript">
         $(function () {
-            var url="/seller/showgzq";
-            var args = "";
-            $.post(url,args,function (data) {
-                $("#message").text(data);
+//            var url="/seller/showgzq";
+//            $.post(url,args,function (data) {
+//                $("#message").text(data);
+//            })
+            var a= $("#message").innerText;
+            var url='/seller/showgtr';
+            var args="";
+            $.get(url,{user: "aaa"},function (data) {
+                $("#message1").text(data);
             })
         });
     </script>
 </head>
 <body>
-<span id="message"></span>
+<span id="message">haha</span><br>
+<span id="message1"></span>
 </body>
 </html>

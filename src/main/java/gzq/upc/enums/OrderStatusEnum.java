@@ -7,6 +7,9 @@ public enum OrderStatusEnum implements CodeEnum{
     NEW(0,"新订单"),
     FINISHED(1,"完结"),
     CANCEL(2,"已取消"),
+    DELIVERYING(3,"配送中"),
+    ACC(4,"买家确认收货"),
+    WAITING(5,"等待配送"),
     ;
 
     private Integer code;
@@ -17,6 +20,5 @@ public enum OrderStatusEnum implements CodeEnum{
         this.code = code;
         this.message = message;
     }
-
 
 }

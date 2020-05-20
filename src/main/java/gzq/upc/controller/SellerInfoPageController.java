@@ -5,6 +5,7 @@ import gzq.upc.dataobject.SellerInfo;
 import gzq.upc.form.SellerForm;
 import gzq.upc.repository.SellerInfoRepository;
 import gzq.upc.repository.SellerRepository;
+import gzq.upc.service.SellerInfoService;
 import gzq.upc.utils.gzqCookie;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ import java.util.Optional;
 public class SellerInfoPageController {
 
     @Autowired
-    private SellerInfoRepository sellerInfoRepository;
+    private SellerInfoService sellerInfoService;
 
     @Autowired
     private SellerRepository sellerRepository;
@@ -39,23 +40,15 @@ public class SellerInfoPageController {
     public ModelAndView showInfo(@RequestParam(value = "username",required = false) String username, Map<String,Object> map,HttpServletRequest request){
 
         if(StringUtils.isEmpty(username)){
-            Cookie[] cookies = request.getCookies();
-            if(cookies !=null){
-                for(Cookie cookie: cookies){
-                    if(cookie.getName().equals("username")){
-                        username=cookie.getValue();
-                    }
-                }
-            }
-//        username= gzqCookie.getMyCookie("username");
+            username= gzqCookie.getMyCookie(request,"username");
         }
         if(username==null){
             map.put("msg","请先登录");
             map.put("url","/");
             return new ModelAndView("common/error",map);
         }
-       SellerInfo sellerInfo = sellerInfoRepository.findByUsername(username);
-       Optional<Seller> sellerOptional= sellerRepository.findById(sellerInfo.getId());
+       SellerInfo sellerInfo = sellerInfoService.findByUsername(username);
+       Optional<Seller> sellerOptional= sellerRepository.findById(sellerInfo.getId());//最好改成另外写service然后调用Jpa
         if(sellerOptional == null||!sellerOptional.isPresent()){
             Seller seller = new Seller();
             seller.setName("管理员未与超市绑定");
@@ -80,7 +73,7 @@ public class SellerInfoPageController {
     public ModelAndView changeInfo(@RequestParam("username") String username,
                                    @RequestParam("isBind") Integer isBind,
                                    Map<String,Object> map){
-        SellerInfo sellerInfo = sellerInfoRepository.findByUsername(username);
+        SellerInfo sellerInfo = sellerInfoService.findByUsername(username);
         List<Seller> sellerList = sellerRepository.findAll();
         if(isBind==0){
             map.put("operation","绑定超市");
@@ -95,21 +88,11 @@ public class SellerInfoPageController {
     @Transactional
     @PostMapping("/confirmChange")
     public ModelAndView confirmChange(@Valid SellerForm form, BindingResult result,Map<String,Object> map){
-        SellerInfo sellerInfo = sellerInfoRepository.findByUsername(form.getUsername());
-//        SellerInfo sellerInfo1 = sellerInfoRepository.findByUsername(form.getUsername());
-//        if(sellerInfo1!=null){
-//            if(sellerInfo!=sellerInfo){
-//                map.put("msg","User Already Exists");
-//                map.put("url","/seller/sellerInfoPage");
-//                return new ModelAndView("common/error",map);
-//            }
-//        }
+        SellerInfo sellerInfo = sellerInfoService.findByUsername(form.getUsername());
         SellerInfo sellerInfo1 = new SellerInfo();
         BeanUtils.copyProperties(sellerInfo,sellerInfo1);
         sellerInfo1.setId(form.getId());
-        sellerInfoRepository.deleteByUsername(sellerInfo.getUsername());
-        sellerInfoRepository.flush();
-        sellerInfoRepository.save(sellerInfo1);
+        sellerInfoService.save(sellerInfo1);
         map.put("msg","修改成功！");
         map.put("url","/seller/sellerInfoPage");
         return new ModelAndView("common/success",map);

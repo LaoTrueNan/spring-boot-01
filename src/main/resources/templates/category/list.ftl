@@ -14,7 +14,7 @@
                                 <th>类目id</th>
                                 <th>类目名称</th>
                                 <th>type</th>
-                                <th>操作</th>
+                                <th colspan="2">操作</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -24,6 +24,7 @@
                                 <td>${productCategory.categoryName}</td>
                                 <td>${productCategory.categoryType}</td>
                                 <td><a href="/seller/category/index?categoryId=${productCategory.categoryId}">修改</a></td>
+                                <td><a href="/seller/category/del?categoryId=${productCategory.categoryId}">删除</a></td>
                             </tr>
                             </#list>
 

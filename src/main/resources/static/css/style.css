@@ -116,7 +116,7 @@ html {
   width: 100%;
 }
 .sidebar-nav li a {
-  /*color: #dddddd;*/
+  color: #dddddd;
   display: block;
   padding: 10px 15px 10px 30px;
   text-decoration: none;

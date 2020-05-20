@@ -1,15 +1,12 @@
 package gzq.upc.controller;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import gzq.upc.dataobject.ProductCategory;
-import gzq.upc.dataobject.ProductInfo;
 import gzq.upc.exception.SellException;
 import gzq.upc.form.CategoryForm;
 import gzq.upc.service.CategoryService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -72,5 +69,20 @@ public class SellerCategoryController {
 
         map.put("url", "/seller/category/list");
         return new ModelAndView("common/success", map);
+    }
+
+    @GetMapping("/del")
+    public ModelAndView del(@RequestParam("categoryId") Integer categoryId,Map<String,Object> map){
+        ProductCategory productCategory = categoryService.findOne(categoryId);
+        try{
+            categoryService.delete(productCategory);
+        }catch(SellException e){
+            map.put("msg",e.getMessage());
+            map.put("url","/seller/category/list");
+            return new ModelAndView("common/error",map);
+        }
+        map.put("msg","类目删除成功");
+        map.put("url","/seller/category/list");
+        return new ModelAndView("common/success",map);
     }
 }

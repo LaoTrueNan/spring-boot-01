@@ -11,6 +11,7 @@ html {
 }
 body {
   margin: 0;
+    background: #C0FAC0;
 }
 article,
 aside,
@@ -1082,11 +1083,11 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body {
-  font-family: "Adobe 黑体 Std R", Helvetica, Arial, sans-serif;
-  font-size: 20px;
+  font-family: "Microsoft YaHei UI", Helvetica, Arial, sans-serif;
+  font-size: 14px;
   line-height: 1.42857143;
   color: #333333;
-  background-color: #fff;
+  background-color: #08E7E7;
 }
 input,
 button,
@@ -1097,20 +1098,18 @@ textarea {
   line-height: inherit;
 }
 a {
-  color: #ff0000;
+  color: #337ab7;
   text-decoration: none;
 }
 a:hover,
 a:focus {
-  color: #03111d;
+  color: #23527c;
   text-decoration: underline;
 }
-
 a:focus {
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
-
 figure {
   margin: 0;
 }
@@ -1216,7 +1215,7 @@ h6 .small,
 .h6 .small {
   font-weight: 400;
   line-height: 1;
-  color: #777777;
+  color: #d11d1d;
 }
 h1,
 .h1,
@@ -1240,6 +1239,7 @@ h2 .small,
 h3 .small,
 .h3 .small {
   font-size: 65%;
+    font-weight: bolder;
 }
 h4,
 .h4,
@@ -1267,6 +1267,8 @@ h6 .small,
 h1,
 .h1 {
   font-size: 36px;
+    font-weight: bold;
+    font-family: "Microsoft YaHei UI";
 }
 h2,
 .h2 {
@@ -3606,7 +3608,7 @@ tbody.collapse.in {
   min-width: 160px;
   padding: 5px 0;
   margin: 2px 0 0;
-  font-size: 20px;
+  font-size: 14px;
   text-align: left;
   list-style: none;
   background-color: #fff;
@@ -4066,7 +4068,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav > li > a:hover,
 .nav > li > a:focus {
   text-decoration: none;
-  /*background-color: #eeeeee;*/
+  background-color: #eeeeee;
 }
 .nav > li.disabled > a {
   color: #777777;

@@ -7,15 +7,20 @@ import javax.persistence.Id;
 
 @Entity
 @Data
-public class SellerInfo {
-
-    private Integer id;
+public class Deliverer {
 
     @Id
+    private String idNum;
+
+    private String deliveryId="";
+
+    private Integer status=0;
+
+    private String name;
+
     private String username;
 
     private String password;
 
-    private String openid;
-
+    private String phone;
 }

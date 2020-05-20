@@ -42,6 +42,8 @@ public class OrderDTO {
 
     List<OrderDetail> orderDetailList;
 
+    private Integer supermarket;
+
     @JsonIgnore
     public OrderStatusEnum getOrderStatusEnum(){
         return EnumUtil.getByCode(orderStatus, OrderStatusEnum.class);

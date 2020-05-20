@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface OrderMasterRepository extends JpaRepository<OrderMaster, String>{
-    Page<OrderMaster> findByBuyerOpenid(String openid, Pageable pageable);
+    Page<OrderMaster> findBySupermarket(Integer supermarket, Pageable pageable);
 }

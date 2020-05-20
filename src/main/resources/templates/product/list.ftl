@@ -37,10 +37,10 @@
                                 <td>${productInfo.categoryType}</td>
                                 <td>${productInfo.createTime}</td>
                                 <td>${productInfo.updateTime}</td>
-                                <td><a href="/sell/seller/product/index?productId=${productInfo.productId}">修改</a></td>
+                                <td><a href="/seller/product/index?productId=${productInfo.productId}">修改</a></td>
 
-                                <td><#if productInfo.productStatus==0><a href="/sell/seller/product/offsale?productId=${productInfo.productId}">下架</a>
-                                <#else><a href="/sell/seller/product/onsale?productId=${productInfo.productId}">上架</a></#if></td>
+                                <td><#if productInfo.productStatus==0><a href="/seller/product/offsale?productId=${productInfo.productId}">下架</a>
+                                <#else><a href="/seller/product/onsale?productId=${productInfo.productId}">上架</a></#if></td>
 
                             </tr>
                             </#list>
@@ -57,7 +57,7 @@
                             </li>
                         <#else>
                             <li>
-                                <a href="/sell/seller/product/list?page=${currentPage-1}&size=${size}">上一页</a>
+                                <a href="/seller/product/list?page=${currentPage-1}&size=${size}">上一页</a>
                             </li>
                         </#if>
                         <#list 1..productInfoPage.getTotalPages() as index>
@@ -65,7 +65,7 @@
                                 <li class="disabled"><a>${index}</a></li>
                             <#else>
                                 <li>
-                                    <a href="/sell/seller/product/list?page=${index}&size=${size}">${index}</a>
+                                    <a href="/seller/product/list?page=${index}&size=${size}">${index}</a>
                                 </li>
                             </#if>
 
@@ -76,7 +76,7 @@
                             </li>
                         <#else>
                             <li>
-                                <a href="/sell/seller/product/list?page=${currentPage+1}&size=${size}">下一页</a>
+                                <a href="/seller/product/list?page=${currentPage+1}&size=${size}">下一页</a>
                             </li>
                         </#if>
                         </ul>
