@@ -88,7 +88,7 @@ public class OrderServiceImpl implements OrderService{
         }
         List<OrderDetail> orderDetailList = orderDetailRepository.findByOrderId(orderId);
         if(CollectionUtils.isEmpty(orderDetailList)){
-            throw new SellException(ResultEnum.ORDER_DETAIL_EMPTY);//被我改过，本来是订单详情不存在
+            throw new SellException(ResultEnum.ORDER_DETAIL_EMPTY);
         }
 
         OrderDTO orderDTO = new OrderDTO();
@@ -99,8 +99,8 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
-    public Page<OrderDTO> findList(String buyerOpenid, Pageable pageable) {
-        Page<OrderMaster> orderMastersPage = orderMasterRepository.findByBuyerOpenid(buyerOpenid, pageable);
+    public Page<OrderDTO> findList(Integer supermarket, Pageable pageable) {
+        Page<OrderMaster> orderMastersPage = orderMasterRepository.findBySupermarket(supermarket,pageable);
 
         List<OrderDTO> orderDTOList = OrderMaster2OrderDTOConverter.convert(orderMastersPage.getContent());
 
@@ -141,7 +141,7 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     public OrderDTO finish(OrderDTO orderDTO) {
-        if(!orderDTO.getOrderStatus().equals(OrderStatusEnum.NEW.getCode())){
+        if(!orderDTO.getOrderStatus().equals(OrderStatusEnum.ACC.getCode())){
             log.error("[完结订单] 订单状态不正确， orderId={},orderStatus={}",orderDTO.getOrderId(),orderDTO.getOrderStatus());
             throw new SellException(ResultEnum.ORDER_STATUS_ERROR);
         }
@@ -187,5 +187,24 @@ public class OrderServiceImpl implements OrderService{
         List<OrderDTO> orderDTOList = OrderMaster2OrderDTOConverter.convert(orderMasterPage.getContent());
 
         return new PageImpl<>(orderDTOList, pageable, orderMasterPage.getTotalElements());
+    }
+
+    @Override
+    public OrderDTO distribute(OrderDTO orderDTO){
+        if(!orderDTO.getOrderStatus().equals(OrderStatusEnum.NEW.getCode())){
+            log.error("[发布订单] 订单状态不正确 orderId={}, orderStatus={}",orderDTO.getOrderId(),orderDTO.getOrderStatus());
+            throw new SellException(ResultEnum.ORDER_STATUS_ERROR);
+        }
+
+        orderDTO.setOrderStatus(OrderStatusEnum.WAITING.getCode());
+        OrderMaster orderMaster = new OrderMaster();
+        BeanUtils.copyProperties(orderDTO,orderMaster);
+        OrderMaster updateResult = orderMasterRepository.save(orderMaster);
+
+        if(updateResult == null){
+            log.error("[发布订单] 发布订单失败 orderMaster={}",orderMaster);
+            throw new SellException(ResultEnum.ORDER_UPDATE_FAIL);
+        }
+        return orderDTO;
     }
 }

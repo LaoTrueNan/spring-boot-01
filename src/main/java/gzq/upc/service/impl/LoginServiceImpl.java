@@ -6,6 +6,7 @@ import gzq.upc.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.*;
 import java.util.List;
 @Service
 public class LoginServiceImpl implements LoginService{
@@ -14,7 +15,6 @@ public class LoginServiceImpl implements LoginService{
 
     @Override
     public String check(String username, String password) {
-        List<SellerInfo> sellerInfoList = sellerInfoRepository.findAll();
         SellerInfo sellerInfo = sellerInfoRepository.findByUsername(username);
         if(sellerInfo == null){
             return "No Such User";
@@ -24,6 +24,25 @@ public class LoginServiceImpl implements LoginService{
             }else{
                 return "Wrong Password";
             }
+        }
+    }
+
+    @Override
+    public String regi(String username,String openid) {
+        List<SellerInfo> sellerInfoList = sellerInfoRepository.findAll();
+        String result=null;
+        for(SellerInfo sellerInfo:sellerInfoList){
+             if(openid.equals(sellerInfo.getOpenid())){
+                 result="Openid Already Exists";
+             }
+        }
+        SellerInfo sellerInfo = sellerInfoRepository.findByUsername(username);
+        if(sellerInfo != null){
+            return "Username Already Exists";
+        }else if(result != null){
+            return result;
+        }else {
+            return "Success";
         }
     }
 }
