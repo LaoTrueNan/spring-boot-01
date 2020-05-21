@@ -23,4 +23,6 @@ public class Deliverer {
     private String password;
 
     private String phone;
+
+    private Integer orderTask;
 }

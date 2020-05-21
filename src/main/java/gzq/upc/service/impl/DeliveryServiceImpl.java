@@ -4,6 +4,7 @@ import gzq.upc.dataobject.Deliverer;
 import gzq.upc.enums.ResultEnum;
 import gzq.upc.exception.SellException;
 import gzq.upc.repository.DelivererRepository;
+import gzq.upc.repository.TasksRepository;
 import gzq.upc.service.DeliveryService;
 import gzq.upc.utils.IntUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ import java.util.Optional;
 public class DeliveryServiceImpl implements DeliveryService {
     @Autowired
     private DelivererRepository delivererRepository;
+
+    @Autowired
+    private TasksRepository tasksRepository;
 
     @Override
     public Page<Deliverer> findList(Integer status,Pageable pageable) {
@@ -60,8 +64,12 @@ public class DeliveryServiceImpl implements DeliveryService {
         Deliverer deliverer = this.findOne(idNum);
         if(deliverer==null){
             throw new SellException(ResultEnum.DELIVERER_NOT_EXIST);
+        }else if(deliverer.getOrderTask()!=0){
+            throw new SellException(ResultEnum.FIRE_FAILED);
         }
-        deliverer.setStatus(0);
+        deliverer.setStatus(-1);
+        tasksRepository.deleteByDeliveryId(deliverer.getDeliveryId());
+        //解雇必须将tasks表中的记录删除
         deliverer.setDeliveryId("");
         deliverer=delivererRepository.save(deliverer);
         if(deliverer == null){

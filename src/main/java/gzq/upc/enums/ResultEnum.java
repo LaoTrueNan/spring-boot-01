@@ -17,6 +17,7 @@ public enum  ResultEnum {
     CATEGORY_DELETE_FAIL(19,"删除类目请将原有商品移出！"),
     DELIVERER_NOT_EXIST(20,"配送员不存在"),
     HFIRE_FAILED(21,"配送员操作失败"),
+    FIRE_FAILED(22,"配送员有未完成订单"),
     ;
 
     private Integer code;
