@@ -13,9 +13,19 @@ $(function () {
             var patrn = /^[a-zA-Z]{1,30}$/;
             if (!patrn.exec($(":input[name='username']").val())){
                 $("#message1").text("用户名不合输入规则！");
+                return false;
             }
+            var username= $(this).val();
+            var url="/welcome/all?username="+username;
+            $.get(url,function (data) {
+                if(data!=null){
+                    $("#message1").text(data);
+                }
+            })
         }
     });
+
+
     refocus($("input[name='username']"),$("#message1"));
 
     $("input[name='password']").blur(function () {

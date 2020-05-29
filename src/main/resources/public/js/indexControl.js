@@ -1,5 +1,5 @@
 $(function () {
-
+	$("input[name='username']").focus();
     function refocus(e1,e2) {
         e1.focus(function () {
             e2.text("");
