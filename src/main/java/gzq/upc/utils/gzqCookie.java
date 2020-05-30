@@ -17,11 +17,11 @@ public class gzqCookie {
     return null;
     }
 
-    public static String setCookie(HttpServletResponse response,String cookieName,String newValue){
+    public static String setCookie(HttpServletResponse response,String cookieName,String newValue,String path){
 
         Cookie cookie = new Cookie(cookieName,newValue);
         cookie.setDomain("");
-        cookie.setPath("/");
+        cookie.setPath(path);
         response.addCookie(cookie);
         return newValue;
     }

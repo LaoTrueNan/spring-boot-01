@@ -1,5 +1,5 @@
 $(function () {
-
+    $(":input[name='username']").focus();
     function refocus(e1,e2) {
         e1.focus(function () {
             e2.text("");
@@ -48,16 +48,24 @@ $(function () {
 
     refocus($("input[name='confirmPas']"),$("#message3"));
 
-    $("input[name='openId']").blur(function () {
+    $("input[name='openid']").blur(function () {
        if($(this).val()==""){
            if($("#message1").text()=="" && $("#message2").text()=="" && $("#message3").text()==""){
                $("#message4").text("管理员ID不能为空！");
            }
        }else{
            var patrn = /^[0-9]{6,30}$/;
-           if (!patrn.exec($(":input[name='openId']").val())){
+           if (!patrn.exec($(":input[name='openid']").val())){
                $("#message4").text("管理员ID不合输入规则！");
            }
+           var openid= $(this).val();
+           var url="/welcome/all?openid="+openid;
+           $.get(url,function (data) {
+               if(data!=null){
+                   $("#message4").text(data);
+               }
+           })
+
        }
     });
 

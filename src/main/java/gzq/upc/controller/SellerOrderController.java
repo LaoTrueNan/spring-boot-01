@@ -1,10 +1,12 @@
 package gzq.upc.controller;
 
 import gzq.upc.dataobject.OrderMaster;
+import gzq.upc.dataobject.Seller;
 import gzq.upc.dataobject.SellerInfo;
 import gzq.upc.dto.OrderDTO;
 import gzq.upc.enums.ResultEnum;
 import gzq.upc.exception.SellException;
+import gzq.upc.repository.SellerRepository;
 import gzq.upc.service.OrderService;
 import gzq.upc.service.SellerInfoService;
 import gzq.upc.utils.gzqCookie;
@@ -22,7 +24,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/seller/order")
@@ -31,6 +35,9 @@ public class SellerOrderController {
 
     @Autowired
     private OrderService orderService;
+
+    @Autowired
+    private SellerRepository sellerRepository;
 
     @Autowired
     private SellerInfoService sellerInfoService;
@@ -43,8 +50,16 @@ public class SellerOrderController {
         PageRequest request = PageRequest.of(page-1,size);
         SellerInfo sellerInfo= new SellerInfo();
 
-        sellerInfo = sellerInfoService.findByUsername(gzqCookie.getMyCookie(httpServletRequest,"username"));
-
+        String currentUser = gzqCookie.getMyCookie(httpServletRequest,"username");
+        sellerInfo = sellerInfoService.findByUsername(currentUser);
+        Integer status = sellerInfo.getId();
+        //将现有的超市id读出
+        List<Integer> sellIds = sellerRepository.findAll().stream().map(Seller::getId).collect(Collectors.toList());
+        if(sellIds.indexOf(status) == -1){
+            map.put("msg","您还未与超市绑定！请前去绑定");
+            map.put("url","/seller/sellerInfoPage");
+            return new ModelAndView("common/error",map);
+        }
         Page<OrderDTO> orderDTOPage = orderService.findList(sellerInfo.getId(),request);
         map.put("orderDTOPage",orderDTOPage);
         map.put("currentPage",page);

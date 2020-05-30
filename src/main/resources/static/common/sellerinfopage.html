@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>主页</title>
+	<link rel="stylesheet" type="text/css" href="/css/sellerinfopage.css"/>
+	<script type="text/javascript" src="/jquery-3.5.0.min.js"></script>
+	<script type="text/javascript" src="/jquery.cookie.js"></script>
+	<script type="text/javascript" src="/js/sellerinfopage.js"></script>
+</head>
+<body>
+<div class="wrapper">
+	<img alt="图片无法显示" class="img-thumbnail" width="150px" height="150px"/>
+	<form class="form-horizontal" role="form">
+		<div class="form-group">
+			<label class="col-sm-2 control-label">用户名</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" readonly="readonly" name="username"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">超市名称</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" readonly="readonly" name="sellname"/>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-sm-2 control-label">超市地址</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" readonly="readonly" name="selladdress"/>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-sm-2 control-label">管理员ID</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" readonly="readonly" name="openid"/>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="col-sm-10">
+				<span><button type="button" href="/common/sellerinfochange.html">修改信息</button></span>
+			</div>
+		</div>
+	</form>
+	<div class="bulletinbox">
+		<div class="panelhead">
+			<h4>超市公告</h4>
+		</div>
+		<div class="panelcontent">
+
+		</div>
+	</div>
+</div>
+</body>
+</html>

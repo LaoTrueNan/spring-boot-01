@@ -4,9 +4,17 @@
 		<meta charset="utf-8">
 		<title>请登录</title>
 		<link rel="stylesheet" type="text/css" href="/css/login.css"/>
-		
-		<script type="text/javascript" src="jquery-3.5.0.min.js"></script>
-		<script type="text/javascript" src="js/indexControl.js"></script>
+		<script type="text/javascript" src="/jquery-3.5.0.min.js"></script>
+		<script type="text/javascript" src="/jquery.cookie.js"></script>
+		<script type="text/javascript">
+			$(function () {
+			    var lastusername = $.cookie('lastusername');
+                $("input[name='username']").val(lastusername);
+                $.cookie('username',null,{path:'/', expires: 0});
+            });
+
+		</script>
+		<script type="text/javascript" src="/js/indexControl.js"></script>
 	</head>
 	<body>
 		<div class="wrapper">

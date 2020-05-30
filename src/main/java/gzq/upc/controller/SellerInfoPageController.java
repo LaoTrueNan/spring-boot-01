@@ -13,10 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
@@ -36,37 +33,29 @@ public class SellerInfoPageController {
     @Autowired
     private SellerRepository sellerRepository;
 
-    @GetMapping("/sellerInfoPage")
-    public ModelAndView showInfo(@RequestParam(value = "username",required = false) String username, Map<String,Object> map,HttpServletRequest request){
+    @GetMapping("/sellerInfo")
+    @ResponseBody
+    public SellerInfo get(@RequestParam("username") String username){
+        SellerInfo sellerInfo = sellerInfoService.findByUsername(username);
+        return sellerInfo;
+    }
 
-        if(StringUtils.isEmpty(username)){
-            username= gzqCookie.getMyCookie(request,"username");
-        }
-        if(username==null){
-            map.put("msg","请先登录");
-            map.put("url","/");
-            return new ModelAndView("common/error",map);
-        }
-       SellerInfo sellerInfo = sellerInfoService.findByUsername(username);
-       Optional<Seller> sellerOptional= sellerRepository.findById(sellerInfo.getId());//最好改成另外写service然后调用Jpa
-        if(sellerOptional == null||!sellerOptional.isPresent()){
-            Seller seller = new Seller();
+    @PostMapping("/sellerInfoPage")
+    @ResponseBody
+    public Seller showInfo(@RequestParam("username") String username) {
+
+        SellerInfo sellerInfo = sellerInfoService.findByUsername(username);
+        Optional<Seller> sellerOptional = sellerRepository.findById(sellerInfo.getId());//最好改成另外写service然后调用Jpa
+        Seller seller = new Seller();
+        if (sellerOptional == null || !sellerOptional.isPresent()) {
             seller.setName("管理员未与超市绑定");
             seller.setAddress("");
             seller.setBulletin("请与超市进行绑定！");
-//            seller.setAvatar("");
-            map.put("seller",seller);
-            map.put("sellerInfo",sellerInfo);
-            map.put("isBind","0");
-            return new ModelAndView("common/sellerInfoPage",map);
+            seller.setAvatar("/img/headicon.jpg");
         }else{
-            Seller seller = sellerOptional.get();
-            map.put("seller",seller);
-            map.put("sellerInfo",sellerInfo);
-            map.put("isBind","1");
-            return new ModelAndView("common/sellerInfoPage",map);
+            seller = sellerOptional.get();
         }
-
+        return seller;
     }
 
     @GetMapping("/changeInfo")

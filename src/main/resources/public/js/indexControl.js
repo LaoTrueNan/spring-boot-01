@@ -32,7 +32,25 @@ $(function () {
         if($("#message1").text()!=""||$("#message2").text()!=""){
             return false;
         }else{
-            $(".form-horizontal").submit();
+           var data = $(".form-horizontal").serialize();
+           var targeturl = $(".form-horizontal").attr("action");
+           $.ajax({
+               async:false,
+               type:'post',
+               url:targeturl,
+               data:data,
+               datatype:'json',
+               success:function (data) {
+                   if(data=="success"){
+                       alert("登录成功！欢迎");
+                       setTimeout('location.href="/welcome.html"',200);
+                   }else if(data=="Wrong Password"){
+                       alert("密码错误!");
+                   }else{
+                       alert("用户名不存在!");
+                   }
+               }
+           })
         }
     });
 

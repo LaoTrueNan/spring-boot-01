@@ -6,6 +6,8 @@ import gzq.upc.service.SellerInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SellerInfoServiceImpl implements SellerInfoService{
 
@@ -20,5 +22,10 @@ public class SellerInfoServiceImpl implements SellerInfoService{
     @Override
     public SellerInfo save(SellerInfo sellerInfo){
         return repository.save(sellerInfo);
+    }
+
+    @Override
+    public List<SellerInfo> findAll() {
+        return repository.findAll();
     }
 }
