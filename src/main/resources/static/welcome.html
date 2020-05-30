@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>主页</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<link rel="stylesheet" type="text/css" href="/css/index.css"/>
+		<link rel="icon" href="/img/logo1.png">
+		<script type="text/javascript" src="/jquery-3.5.0.min.js"></script>
+		<script type="text/javascript" src="/jquery.cookie.js"></script>
+		<script type="text/javascript" src="/js/common.js"></script>
+		<script type="text/javascript" src="/js/index.js"></script>
+	</head>
+	<body>
+		<div class="header">
+			<ul class="header_ta">
+				<li><img src="/img/poc.png" height="70px"></li>
+				<li title="欢迎">欢迎访问口袋超市后台管理系统</li>
+			</ul>
+			<div id="head_op" class="h_right">
+				<img src="/img/headicon.jpg" height="70px" id="infoIcon" title="用户头像">
+				<div class="info_op hide">
+				<ul>
+					<li href="/common/sellerinfopage.html">个人信息</li>
+					<li>超市信息</li>
+					<li href="/welcome/logout">退出登录</li>
+				</ul>
+					
+				</div>
+			</div>
+			<div class="bg"></div>
+		</div>
+		<div id="content" class="content">
+			
+			<div id="navbar" class="navbar">
+				<nav>
+				    <ul class="sidebar-nav">
+						<div class="contentbg">
+							
+						</div>
+				        <li class="firstclass" href="/common/sellerinfopage.html">
+							管理员信息
+				        </li>
+				        <li class="firstclass" href="/seller/order/list">
+				            订单
+				        </li>
+				        <li class="firstclass" href="/delivery/list">
+				            配送员
+				        </li>
+				        <li class="firstclass">
+				            <span class="toggledown"><span title="点击展开或收起"> ☆商品操作 </span><span class="caret"> </span></span>
+				            <ul class="hide">
+				                <li href="/seller/product/list">1.商品列表</li>
+				                <li href="/seller/product/index">2.新增商品</li>
+				            </ul>
+				        </li>
+				        <li class="firstclass">
+				            <span class="toggledown"><span title="点击展开或收起"> ☆类目操作 </span><span class="caret"> </span></span>
+				            <ul class="hide">
+				                <li href="/seller/category/list">1.类目列表</li>
+				                <li href="/seller/category/index">2.新增类目</li>
+				            </ul>
+				        </li>
+				    </ul>
+				</nav>
+			</div>
+			<div id="main" class="main">
+				<iframe src="/common/sellerinfopage.html" width="100%" height="100%" scrolling="yes" frameborder="0"></iframe>
+			</div>
+		</div>
+	</body>
+</html>

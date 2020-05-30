@@ -1,0 +1,190 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+body,html{
+	width: 100%;
+}
+
+div{
+	margin: 0 auto;
+	position: relative;
+}
+
+li{
+	font-family: "microsoft yahei";
+}
+
+.hide li{
+	list-style-type: none;
+	line-height: 30px;
+	cursor: pointer;
+}
+
+.header{
+	height: 70px;
+	width: 1350px;
+	color: white;
+}
+
+#infoIcon{
+	border-radius: 10px;
+}
+
+.bg{
+	background-image: url("/img/code-wallpaper-6.png");
+	z-index: -1;
+	filter: blur(5px);
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+}
+
+
+.header_ta li{
+	float: left;
+	list-style-type: none;
+	margin-bottom: -2px;
+}
+
+.header_ta li:nth-child(2){
+	float: left;
+	list-style-type: none;
+	font-size: 25px;
+	margin-top: 20px;
+}
+
+.welcome{
+	font-size: 30px;
+	margin-top:-20px;
+}
+
+.hide{
+	display: none;
+}
+
+.info_op{
+	text-align: center;
+	background: #3CC4C4;
+	height: 90px;
+	position: absolute;
+	border: #272C33;
+	border-radius: 10px;
+	z-index: 999;
+	color: black;
+}
+
+.info_op li:hover{
+	background: aqua;
+}
+
+#head_op{
+	background: white;
+	text-align: right;
+}
+
+.h_left{
+	height: 70px;
+}
+.h_right{
+	height: 70px;
+	float: right;
+	margin-bottom: 0px;
+	background: gray;
+	text-align: right;
+}
+
+.navbar{
+	height: 700px;
+	width: 200px;
+	float: left;
+}
+
+.content{
+	height: 700px;
+	width: 1350px;
+	z-index: 0;
+	clear: both;
+}
+.contentbg{
+		background-image: url("/img/code-wallpaper-6.png");
+		z-index: -1;
+		filter: blur(5px);
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+}
+
+.firstclass{
+	color: white;
+}
+
+#main{
+	height: 700px;
+	width: 1150px;
+	float: left;
+}
+
+.sidebar-nav .firstclass{
+	display: block;
+	width: 150px;
+	margin: 30px;
+	font-size: 18px;
+}
+
+.sidebar-nav .firstclass:nth-child(2),
+.sidebar-nav .firstclass:nth-child(3),
+.sidebar-nav .firstclass:nth-child(4){
+	cursor: pointer;
+}
+
+.sidebar-nav .firstclass:nth-child(2):hover,
+.sidebar-nav .firstclass:nth-child(3):hover,
+.sidebar-nav .firstclass:nth-child(4):hover{
+	color: red;
+	background: aqua;
+}
+
+.caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 2px;
+  vertical-align: middle;
+  border-top: 4px dashed;
+  border-top: 4px solid \9;
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
+}
+
+li a{
+	display: block;
+}
+
+.toggledown{
+	cursor: cell;
+}
+
+.firstclass .hide li:hover{
+	color: #ee113d;
+}
+
+.firstclass span{
+	font-family: "黑体";
+	color: white;
+}
+
+.firstclass li{
+	margin-top: 15px;
+	margin-left: 30px;
+	line-height: 30px;
+}
+
+iframe{
+	padding-top: 15px;
+	padding-left: 10px;
+}

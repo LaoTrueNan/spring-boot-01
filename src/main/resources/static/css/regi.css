@@ -1,0 +1,116 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+
+body{
+	padding-top: 90px;
+	line-height: 1.21;
+	width: 100%;
+	background: #3cc4c4;
+}
+
+a{
+	text-decoration: none;
+}
+
+.loginForm{
+	background: #3CC4C4;
+	width: 400px;
+	margin: 0 auto;
+	height: 330px;
+	border-radius: 19px;
+	margin-top: 10px;
+	clear: both;
+	font-family: "Microsoft YaHei UI";
+}
+
+.form-group span{
+	font-family: inherit;
+	color: #FF0000;
+}
+
+.page-header{
+	font-family: "Microsoft YaHei UI";
+	width: 400px;
+	margin: 0 auto;
+	border-bottom: 1px solid #eeeeee;
+}
+
+.page-header h2{
+	margin-left: 60px;
+}
+
+small{
+	line-height: 1;
+	color: red;
+}
+
+.form-horizontal{
+	display: table;
+	margin: 0 auto;
+}
+
+.control-label{
+	display: inline-block;	
+	text-align: right;
+	margin-top: 25px;
+	/* margin-left: 100px; */
+	padding-left: 15px;
+	padding-right: 15px;
+}
+.col-sm-10{
+	width: 280px;
+	height: 35px;
+	margin-top: 5px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.form-group{
+	display: table;
+	margin-left: -15px;
+	margin-right: -15px;
+	margin: 0 auto;
+}
+
+.form-control{
+	display: block;
+	width: 100%;
+	border: 1px solid black;
+	border-radius: 4px;
+	height: 26px;
+	padding: 6px 12px;
+	outline: none;
+	border: 1px solid transparent;
+}
+
+.wrapper{
+	width: 430px;
+	margin: 0 auto;
+	padding-right: 15px;
+	padding-left: 15px;
+}
+
+.btn,
+.btn:focus{
+	width: 60px;
+	height: 35px;
+	font-family: "microsoft yahei";
+	border: 1px solid transparent;
+	border-radius: 5px;
+	background: white;
+	white-space: nowrap;
+	cursor: pointer;
+	outline: none;
+}
+
+.btn:hover
+{
+	outline: none;
+	background-color: #DDDDDD;
+}
+
+.col-sm-offset-2{
+	margin-top: 35px;
+}

@@ -1,0 +1,107 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+body,html{
+	width: 100%;
+	background: #EEEEEE;
+	font-family: "microsoft yahei";
+}
+
+div{
+	margin: 0 auto;
+	position: relative;
+}
+
+.wrapper{
+	width: 800px;
+	height: 400px;
+	margin-top: 35px;
+}
+
+.img-thumbnail{
+	margin-left: 100px;
+	border: 2px dashed black;
+}
+
+.form-horizontal{
+	display: table;
+	margin: 0 auto;
+	width: 400px;
+	margin-top: 35px;
+	float: right;
+}
+
+.form-group{
+	display: table;
+	margin-left: -20px;
+	margin-top: 30px;
+}
+
+.control-label{
+	float: left;
+	display: inline-block;
+	width: 65px;
+}
+
+.col-sm-10{
+	float: left;
+	width: 100px;
+	text-align: right;
+	margin-top: -10px;
+}
+
+.form-control{
+	float: left;
+	display: inline-block;
+}
+
+input.form-control{
+	height: 30px;
+	border-radius: 5px;
+	outline: none;
+	margin-left: 35px;
+	padding: 6px 12px;
+	width: 200px;
+}
+
+button{
+	border: 1px solid transparent;
+	border-radius: 4px;
+	outline: none;
+	color: black;
+	background: white;
+	height: 35px;
+	width: 60px;
+	margin-top: 10px;
+	white-space: nowrap;
+	cursor: pointer;
+}
+
+button:hover{
+	background: gray;
+}
+
+.bulletinbox{
+	float: right;
+	width: 200px;
+	margin-right: 100px;
+	border: 1px solid gray;
+	border-radius: 4px;
+
+}
+
+.panelhead{
+	background: gray;
+	border: 1px solid transparent;
+	border-radius: 5px;
+	width: 200px;
+	height: 25px;
+}
+
+.panelcontent{
+	width: 200px;
+	height: 200px;
+	background: #DDDDDD;
+}
+
