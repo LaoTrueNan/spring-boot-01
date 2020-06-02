@@ -75,7 +75,23 @@ $(function () {
         if($("#message1").text()!=""||$("#message2").text()!=""||$("#message3").text()!=""||$("#message4").text()!=""){
             return false;
         }else{
-            $(".myForm").submit();
+            var data = $(".form-horizontal").serialize();
+            var targeturl = $(".form-horizontal").attr("action");
+            $.ajax({
+                async:false,
+                type:'post',
+                url:targeturl,
+                data:data,
+                datatype:'json',
+                success:function (data) {
+                    if(data=="success"){
+                        alert("注册成功！跳转登录");
+                        setTimeout('location.href="/"',200);
+                    }else{
+                        alert("注册失败！");
+                    }
+                }
+            })
         }
     });
 });

@@ -17,6 +17,8 @@ public class ProductForm {
 
     private String productIcon;
 
+    private Integer supermarket;
+
 //    private String productDescription;
 
     private  Integer productStatus= ProductStatusEnum.UP.getCode();

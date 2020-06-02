@@ -1,22 +1,25 @@
 package gzq.upc.controller;
 
 import gzq.upc.dataobject.ProductCategory;
+import gzq.upc.dataobject.SellerInfo;
+import gzq.upc.enums.ResultEnum;
 import gzq.upc.exception.SellException;
 import gzq.upc.form.CategoryForm;
 import gzq.upc.service.CategoryService;
+import gzq.upc.service.SellerInfoService;
+import gzq.upc.utils.gzqCookie;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/seller/category")
@@ -26,9 +29,14 @@ public class SellerCategoryController {
     @Autowired
     private CategoryService categoryService;
 
+    @Autowired
+    private SellerInfoService sellerInfoService;
+
     @GetMapping("/list")
-    public ModelAndView list(Map<String, Object> map) {
-        List<ProductCategory> productCategoryList = categoryService.findAll();
+    public ModelAndView list(Map<String, Object> map, HttpServletRequest httpServletRequest) {
+        String username = gzqCookie.getMyCookie(httpServletRequest,"username");
+        SellerInfo sellerInfo = sellerInfoService.findByUsername(username);
+        List<ProductCategory> productCategoryList = categoryService.findBySupermarket(sellerInfo.getId());
         map.put("categoryList",productCategoryList);
         return new ModelAndView("category/list",map);
     }
@@ -45,44 +53,46 @@ public class SellerCategoryController {
     }
 
     @PostMapping("/save")
-    public ModelAndView save(@Valid CategoryForm form,
+    @ResponseBody
+    public String save(@Valid CategoryForm form,
                              BindingResult bindingResult,
-                             Map<String, Object> map) {
-        if (bindingResult.hasErrors()) {
-            map.put("msg", bindingResult.getFieldError().getDefaultMessage());
-            map.put("url", "/seller/category/index");
-            return new ModelAndView("common/error", map);
-        }
-
+                             HttpServletRequest httpServletRequest) {
+        String username = gzqCookie.getMyCookie(httpServletRequest,"username");
+        SellerInfo sellerInfo = sellerInfoService.findByUsername(username);
+        List<ProductCategory> productCategoryList = categoryService.findBySupermarket(sellerInfo.getId());
+        List<String> categorynames = productCategoryList.stream().map(ProductCategory::getCategoryName).collect(Collectors.toList());
         ProductCategory productCategory = new ProductCategory();
         try {
             if (form.getCategoryId() != null) {
                 productCategory = categoryService.findOne(form.getCategoryId());
+                String currentname = productCategory.getCategoryName();
+                if(!form.getCategoryName().equals(currentname) && categorynames.indexOf(form.getCategoryName())!=-1){
+                    throw new SellException(ResultEnum.ALREADY_EXIST);
+                }
+            }else{
+                form.setSupermarket(sellerInfo.getId());
+                BeanUtils.copyProperties(form,productCategory);
+                if(categorynames.indexOf(productCategory.getCategoryName())!=-1){
+                    throw new SellException(ResultEnum.ALREADY_EXIST);
+                }
             }
-            BeanUtils.copyProperties(form, productCategory);
             categoryService.save(productCategory);
         } catch (SellException e) {
-            map.put("msg", e.getMessage());
-            map.put("url", "/seller/category/index");
-            return new ModelAndView("common/error", map);
+            return e.getMessage();
         }
 
-        map.put("url", "/seller/category/list");
-        return new ModelAndView("common/success", map);
+        return "/seller/category/list";
     }
 
     @GetMapping("/del")
-    public ModelAndView del(@RequestParam("categoryId") Integer categoryId,Map<String,Object> map){
+    @ResponseBody
+    public String del(@RequestParam("categoryId") Integer categoryId){
         ProductCategory productCategory = categoryService.findOne(categoryId);
         try{
             categoryService.delete(productCategory);
         }catch(SellException e){
-            map.put("msg",e.getMessage());
-            map.put("url","/seller/category/list");
-            return new ModelAndView("common/error",map);
+            return e.getMessage();
         }
-        map.put("msg","类目删除成功");
-        map.put("url","/seller/category/list");
-        return new ModelAndView("common/success",map);
+        return "/seller/category/list";
     }
 }

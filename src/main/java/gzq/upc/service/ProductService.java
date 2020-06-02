@@ -17,7 +17,7 @@ public interface ProductService {
 
     List<ProductInfo> findUpAll();
 
-    Page<ProductInfo> findAll(Pageable pageable);
+    Page<ProductInfo> findAll(Integer supermarket,Pageable pageable);
 
     ProductInfo save(ProductInfo productInfo);
 

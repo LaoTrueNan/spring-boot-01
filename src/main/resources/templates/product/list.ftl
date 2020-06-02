@@ -1,14 +1,21 @@
 <html>
-    <#include "../common/header.ftl">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.0.1/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="/jquery-3.5.0.min.js"></script>
+    <script type="text/javascript" src="/jquery.cookie.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript" src="/js/product.js"></script>
+</head>
 <body>
 
 <div id="wrapper" class="toggled">
-        <#include "../common/nav.ftl">
     <div id="page-content-wrapper">
             <div class="container-fluid">
                 <div class="row clearfix">
                     <div class="col-md-12 column">
-                        <table class="table table-bordered table-condensed">
+                        <table class="table table-striped table-hover">
                             <thead>
                             <tr>
                                 <th>商品id</th>
@@ -19,7 +26,6 @@
                                 <#--<th>描述</th>-->
                                 <td>状态</td>
                                 <th>类目</th>
-                                <th>创建时间</th>
                                 <th>修改时间</th>
                                 <th colspan="2">操作</th>
                             </tr>
@@ -29,13 +35,12 @@
                             <tr>
                                 <td>${productInfo.productId}</td>
                                 <td>${productInfo.productName}</td>
-                                <td><img height="100" width="100" src="${productInfo.productIcon}" alt="图片无法显示" </td>
+                                <td><img height="70" width="70" src="${productInfo.productIcon}" alt="图片无法显示" </td>
                                 <td>${productInfo.productPrice}</td>
                                 <td>${productInfo.productStock}</td>
                                 <td>${productInfo.getProductStatusEnum().message}</td>
                                 <#--<td>${productInfo.productDescription}</td>-->
                                 <td>${productInfo.categoryType}</td>
-                                <td>${productInfo.createTime}</td>
                                 <td>${productInfo.updateTime}</td>
                                 <td><a href="/seller/product/index?productId=${productInfo.productId}">修改</a></td>
 

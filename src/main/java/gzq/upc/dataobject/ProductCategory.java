@@ -28,6 +28,8 @@ public class ProductCategory {
      */
     private Integer categoryType;
 
+    private Integer supermarket;
+
     public ProductCategory() {
     }
 

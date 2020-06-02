@@ -11,6 +11,7 @@
 			    var lastusername = $.cookie('lastusername');
                 $("input[name='username']").val(lastusername);
                 $.cookie('username',null,{path:'/', expires: 0});
+                $.cookie('isBind',null,{path:'/', expires: 0});
             });
 
 		</script>

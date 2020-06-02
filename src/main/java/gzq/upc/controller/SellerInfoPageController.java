@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
@@ -71,19 +72,20 @@ public class SellerInfoPageController {
         }
         map.put("sellerInfo",sellerInfo);
         map.put("sellList",sellerList);
-        return new ModelAndView("common/sellerInfoChange",map);
+        return new ModelAndView("/common/sellerInfoChange",map);
     }
 
     @Transactional
     @PostMapping("/confirmChange")
-    public ModelAndView confirmChange(@Valid SellerForm form, BindingResult result,Map<String,Object> map){
+    public ModelAndView confirmChange(@Valid SellerForm form, BindingResult result, Map<String,Object> map, HttpServletResponse httpServletResponse){
         SellerInfo sellerInfo = sellerInfoService.findByUsername(form.getUsername());
         SellerInfo sellerInfo1 = new SellerInfo();
         BeanUtils.copyProperties(sellerInfo,sellerInfo1);
         sellerInfo1.setId(form.getId());
         sellerInfoService.save(sellerInfo1);
+        gzqCookie.setCookie(httpServletResponse,"isBind","1","/");
         map.put("msg","修改成功！");
-        map.put("url","/seller/sellerInfoPage");
+        map.put("url","/common/sellerinfopage.html");
         return new ModelAndView("common/success",map);
     }
 

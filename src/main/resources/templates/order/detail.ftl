@@ -1,5 +1,13 @@
 <html>
-<#include "../common/header.ftl">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.0.1/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="/jquery-3.5.0.min.js"></script>
+    <script type="text/javascript" src="/jquery.cookie.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript" src="/js/order.js"></script>
+</head>
 <body>
 <script type="text/javascript" src="/jquery-3.5.0.min.js"></script>
 <script type="text/javascript">
@@ -15,7 +23,6 @@
     })
 </script>
 <div id="wrapper" class="toggled">
-<#include "../common/nav.ftl">
 <div id="page-content-wrapper">
 <div class="container">
     <div class="row clearfix">

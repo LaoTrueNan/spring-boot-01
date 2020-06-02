@@ -4,6 +4,4 @@ import org.springframework.stereotype.Service;
 
 public interface LoginService {
     String check(String username,String password);
-
-    String regi(String username,String openid);
 }

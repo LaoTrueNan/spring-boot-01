@@ -34,6 +34,8 @@ public class ProductInfo {
 
     private Integer categoryType;
 
+    private  Integer supermarket;
+
     private Date createTime;
     private Date updateTime;
 

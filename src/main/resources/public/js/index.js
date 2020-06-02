@@ -18,8 +18,15 @@ $(function(){
     showRight($(".info_op ul li:nth-child(1)"));
 
     $(".info_op ul li:nth-child(3)").bind('click',function () {
+    	var msg="确认退出？"
+		if(confirm(msg)==true){
 		location.href=$(this).attr("href");
+
+		}else{
+			return false;
+		}
     })
+
 	function freemarker(e) {
 		e.bind('click',function () {
             $("iframe").attr("src",$(this).attr('href'));
@@ -27,6 +34,25 @@ $(function(){
     }
     freemarker($(".sidebar-nav li:nth-child(3)"));
     freemarker($(".sidebar-nav li:nth-child(4)"));
-    freemarker($(".hide li"));
+    freemarker($("ul.hide li"));
+
+    var username = $.cookie("username");
+    $.ajax({
+		async:false,
+		type:'post',
+		url:'/seller/sellerInfoPage',
+		data:{username: username},
+		datatype:'json',
+		success:function (data) {
+    	if(data.address==""){
+            $("#infoIcon").attr("src","/img/headicon.jpg");
+		}else{
+        	$("#infoIcon").attr("src",data.avatar);
+		}
+
+        }
+	})
+
+
 })
 

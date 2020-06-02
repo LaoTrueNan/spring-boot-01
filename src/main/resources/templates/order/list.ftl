@@ -1,14 +1,21 @@
 <html>
-    <#include "../common/header.ftl">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.0.1/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="/jquery-3.5.0.min.js"></script>
+    <script type="text/javascript" src="/jquery.cookie.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript" src="/js/order.js"></script>
+</head>
 <body>
 
 <div id="wrapper" class="toggled">
-        <#include "../common/nav.ftl">
     <div id="page-content-wrapper">
             <div class="container-fluid">
                 <div class="row clearfix">
                     <div class="col-md-12 column">
-                        <table class="table table-bordered table-condensed">
+                        <table class="table table-striped table-hover">
                             <thead>
                             <tr>
                                 <th>订单id</th>
@@ -36,7 +43,7 @@
                                 <td><a href="/seller/order/detail?orderId=${orderDTO.orderId}">详情</a></td>
 
                                 <td>
-                                    <#if orderDTO.getOrderStatus()==0><a href="/seller/order/distri?orderId=${orderDTO.orderId}">发布</a>
+                                    <#if orderDTO.getOrderStatus()==0><a name="distri" href="/seller/order/distri?orderId=${orderDTO.orderId}">发布</a>
                                     <#else><span disabled="true" style="color: #CCCCCC">不可用</span>
                                     </#if>
                                 </td>

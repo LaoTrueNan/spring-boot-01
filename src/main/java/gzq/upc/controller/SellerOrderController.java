@@ -55,11 +55,7 @@ public class SellerOrderController {
         Integer status = sellerInfo.getId();
         //将现有的超市id读出
         List<Integer> sellIds = sellerRepository.findAll().stream().map(Seller::getId).collect(Collectors.toList());
-        if(sellIds.indexOf(status) == -1){
-            map.put("msg","您还未与超市绑定！请前去绑定");
-            map.put("url","/seller/sellerInfoPage");
-            return new ModelAndView("common/error",map);
-        }
+
         Page<OrderDTO> orderDTOPage = orderService.findList(sellerInfo.getId(),request);
         map.put("orderDTOPage",orderDTOPage);
         map.put("currentPage",page);
@@ -68,72 +64,56 @@ public class SellerOrderController {
     }
 
     @GetMapping("/cancel")
-    public ModelAndView cancel(@RequestParam("orderId") String orderId,
-                               Map<String, Object> map){
+    @ResponseBody
+    public String cancel(@RequestParam("orderId") String orderId){
         try {
             OrderDTO orderDTO = orderService.findOne(orderId);
             orderService.cancel(orderDTO);
         }catch (SellException e) {
             log.error("[卖家端取消订单] 查询不到订单");
-            map.put("msg", e.getMessage());
-            map.put("url", "/seller/order/list");
-            return new ModelAndView("common/error", map);
+            return e.getMessage();
         }
 
-        map.put("msg", "取消成功");
-        map.put("url", "/seller/order/list");
-        return new ModelAndView("common/success");
+        return "/seller/order/list";
     }
+
     @GetMapping("/detail")
     public ModelAndView detail(@RequestParam("orderId") String orderId,
                                Map<String,Object> map){
 
         OrderDTO orderDTO = new OrderDTO();
-        try {
-            orderDTO = orderService.findOne(orderId);
-        }catch (SellException e){
-            log.error("[查询订单失败] 发生异常{}",e);
-            map.put("msg",e.getMessage());
-            map.put("url","/seller/order/list");
-            return new ModelAndView("common/error",map);
-        }
-
+        orderDTO = orderService.findOne(orderId);
         map.put("orderDTO",orderDTO);
         return new ModelAndView("order/detail",map);
     }
 
     @GetMapping("/finish")
-    public ModelAndView finish(@RequestParam("orderId") String orderId,
+    @ResponseBody
+    public String finish(@RequestParam("orderId") String orderId,
                                Map<String,Object> map){
         try{
             OrderDTO orderDTO = orderService.findOne(orderId);
             orderService.finish(orderDTO);
         }catch(SellException e){
             log.error("订单完结失败");
-            map.put("msg",e.getMessage());
-            map.put("url","/seller/order/list");
-            return new ModelAndView("common/error",map);
+            return e.getMessage();
         }
-        map.put("msg","订单完结成功！");
-        map.put("url","/seller/order/list");
-        return new ModelAndView("common/success",map);
+        return "/seller/order/list";
     }
 
     @GetMapping("/distri")
-    public ModelAndView distri(@RequestParam("orderId") String orderId,
+    @ResponseBody
+    public String distri(@RequestParam("orderId") String orderId,
                                Map<String,Object> map){
         try{
             OrderDTO orderDTO = orderService.findOne(orderId);
             orderService.distribute(orderDTO);
         }catch(SellException e){
             log.error("发布订单失败");
-            map.put("msg",e.getMessage());
-            map.put("url","/seller/order/list");
-            return new ModelAndView("common/error",map);
+            return e.getMessage();
         }
-        map.put("msg","订单发布成功，等待接单");
-        map.put("url","/seller/order/list");
-        return new ModelAndView("common/success",map);
+
+        return "/seller/order/list";
     }
 
 }

@@ -18,6 +18,7 @@ public enum  ResultEnum {
     DELIVERER_NOT_EXIST(20,"配送员不存在"),
     HFIRE_FAILED(21,"配送员操作失败"),
     FIRE_FAILED(22,"配送员有未完成订单"),
+    ALREADY_EXIST(23,"类目名称重复"),
     ;
 
     private Integer code;

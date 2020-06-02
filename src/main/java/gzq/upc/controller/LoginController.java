@@ -53,22 +53,14 @@ public class LoginController {
 
 
     @PostMapping("/regi")
-    public ModelAndView register(@Valid SellerForm form, BindingResult bindingResult, Map<String, Object> map) {
-
-        String result = loginService.regi(form.getUsername(), form.getOpenid());
-        map.put("msg", result);
-        if (result.equals("Success")) {
+    @ResponseBody
+    public String register(@Valid SellerForm form, BindingResult bindingResult) {
             SellerInfo sellerInfo = new SellerInfo();
             //新注册的管理员没有id，这里设置成随机数
             form.setId(IntUtil.getUniqueKey());
             BeanUtils.copyProperties(form, sellerInfo);
             repository.save(sellerInfo);
-            map.put("url", "/");
-            return new ModelAndView("common/success", map);
-        } else {
-            map.put("url", "/regi.html");
-            return new ModelAndView("common/error", map);
-        }
+            return "success";
     }
 
     @GetMapping("/logout")

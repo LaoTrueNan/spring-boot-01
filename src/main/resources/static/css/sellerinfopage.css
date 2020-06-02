@@ -21,7 +21,8 @@ div{
 
 .img-thumbnail{
 	margin-left: 100px;
-	border: 2px dashed black;
+	border-radius: 15px;
+	border: 1px solid transparent;
 }
 
 .form-horizontal{

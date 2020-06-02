@@ -51,11 +51,7 @@ public class DeliveryController {
         Integer status = sellerInfoService.findByUsername(currentUser).getId();
         //将现有的超市id读出
         List<Integer> sellIds = sellerRepository.findAll().stream().map(Seller::getId).collect(Collectors.toList());
-        if(sellIds.indexOf(status) == -1){
-            map.put("msg","您还未与超市绑定！请前去绑定");
-            map.put("url","/seller/sellerInfoPage");
-            return new ModelAndView("common/error",map);
-        }
+
         PageRequest request = PageRequest.of(page-1,size);
         Page<Deliverer> delivererPage = deliveryService.findList(status,request);
         map.put("deliveryPage",delivererPage);
@@ -73,11 +69,7 @@ public class DeliveryController {
         Integer status = sellerInfoService.findByUsername(currentUser).getId();
         //将现有的超市id读出
         List<Integer> sellIds = sellerRepository.findAll().stream().map(Seller::getId).collect(Collectors.toList());
-        if(sellIds.indexOf(status) == -1){
-            map.put("msg","您还未与超市绑定！请前去绑定");
-            map.put("url","/seller/sellerInfoPage");
-            return new ModelAndView("common/error",map);
-        }
+
         PageRequest request = PageRequest.of(page-1,size);
         Page<Deliverer> delivererPage = deliveryService.findList(0,request);
         map.put("deliveryPage",delivererPage);
@@ -87,7 +79,8 @@ public class DeliveryController {
     }
 
     @GetMapping("/hire")
-    public ModelAndView hire(@RequestParam("idNum") String idNum,
+    @ResponseBody
+    public String hire(@RequestParam("idNum") String idNum,
                              HttpServletRequest httpServletRequest,
                              Map<String,Object> map){
 
@@ -97,32 +90,24 @@ public class DeliveryController {
         try {
             Deliverer updateResult = deliveryService.update(idNum, sellId);
         }catch(SellException e){
-            log.error("[通过申请] 通过申请失败 idNum={}",idNum);
-            map.put("msg",e.getMessage());
-            map.put("url","/delivery/application");
-            return new ModelAndView("common/error",map);
+            return  e.getMessage();
         }
 
-        map.put("msg","成功接收配送员申请，现在Ta已经属于您的超市了");
-        map.put("url","/delivery/list");
-        return new ModelAndView("common/success",map);
+        return "/delivery/list";
     }
 
     @GetMapping("/fire")
-    public ModelAndView fire(@RequestParam("idNum") String idNum,
+    @ResponseBody
+    public String fire(@RequestParam("idNum") String idNum,
                              Map<String,Object> map){
         try{
             Deliverer deliverer = deliveryService.fire(idNum);
         }catch (SellException e){
             log.error("[解雇配送员] 解雇操作失败, idNum={}",idNum);
-            map.put("msg",e.getMessage());
-            map.put("url","/delivery/list");
-            return new ModelAndView("common/error",map);
+            return e.getMessage();
         }
 
-        map.put("msg","解雇成功");
-        map.put("url","/delivery/list");
-        return new ModelAndView("common/success",map);
+        return "/delivery/list";
 
     }
 

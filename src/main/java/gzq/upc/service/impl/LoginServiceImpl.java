@@ -26,23 +26,4 @@ public class LoginServiceImpl implements LoginService{
             }
         }
     }
-
-    @Override
-    public String regi(String username,String openid) {
-        List<SellerInfo> sellerInfoList = sellerInfoRepository.findAll();
-        String result=null;
-        for(SellerInfo sellerInfo:sellerInfoList){
-             if(openid.equals(sellerInfo.getOpenid())){
-                 result="Openid Already Exists";
-             }
-        }
-        SellerInfo sellerInfo = sellerInfoRepository.findByUsername(username);
-        if(sellerInfo != null){
-            return "Username Already Exists";
-        }else if(result != null){
-            return result;
-        }else {
-            return "Success";
-        }
-    }
 }

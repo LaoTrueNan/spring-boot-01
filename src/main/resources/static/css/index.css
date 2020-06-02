@@ -32,9 +32,10 @@ li{
 }
 
 .bg{
-	background-image: url("/img/code-wallpaper-6.png");
+	/*background-image: url("/img/bg.jpg");*/
+	background: #000033;
 	z-index: -1;
-	filter: blur(5px);
+	filter: blur(3px);
 	position: absolute;
 	left: 0;
 	right: 0;
@@ -109,7 +110,8 @@ li{
 	clear: both;
 }
 .contentbg{
-		background-image: url("/img/code-wallpaper-6.png");
+	/*background-image: url("/img/bg.jpg");*/
+		background: #000033;
 		z-index: -1;
 		filter: blur(5px);
 		position: absolute;
@@ -185,6 +187,6 @@ li a{
 }
 
 iframe{
-	padding-top: 15px;
+	padding-top: 10px;
 	padding-left: 10px;
 }

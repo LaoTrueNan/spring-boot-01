@@ -8,7 +8,11 @@
 		<link rel="icon" href="/img/logo1.png">
 		<script type="text/javascript" src="/jquery-3.5.0.min.js"></script>
 		<script type="text/javascript" src="/jquery.cookie.js"></script>
+		<script type="text/javascript">
+			$.cookie("isBind",null,{path:'/',expires:0});
+		</script>
 		<script type="text/javascript" src="/js/common.js"></script>
+
 		<script type="text/javascript" src="/js/index.js"></script>
 	</head>
 	<body>
@@ -18,7 +22,7 @@
 				<li title="欢迎">欢迎访问口袋超市后台管理系统</li>
 			</ul>
 			<div id="head_op" class="h_right">
-				<img src="/img/headicon.jpg" height="70px" id="infoIcon" title="用户头像">
+				<img src="/img/headicon.jpg" height="70px"  width="70px" id="infoIcon" title="用户头像">
 				<div class="info_op hide">
 				<ul>
 					<li href="/common/sellerinfopage.html">个人信息</li>
@@ -65,7 +69,7 @@
 				</nav>
 			</div>
 			<div id="main" class="main">
-				<iframe src="/common/sellerinfopage.html" width="100%" height="100%" scrolling="yes" frameborder="0"></iframe>
+				<iframe src="/common/sellerinfopage.html" width="100%" height="95%" scrolling="yes" frameborder="0"></iframe>
 			</div>
 		</div>
 	</body>
