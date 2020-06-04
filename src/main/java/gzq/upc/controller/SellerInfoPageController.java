@@ -77,16 +77,15 @@ public class SellerInfoPageController {
 
     @Transactional
     @PostMapping("/confirmChange")
-    public ModelAndView confirmChange(@Valid SellerForm form, BindingResult result, Map<String,Object> map, HttpServletResponse httpServletResponse){
+    @ResponseBody
+    public String confirmChange(@Valid SellerForm form, BindingResult result, Map<String,Object> map, HttpServletResponse httpServletResponse){
         SellerInfo sellerInfo = sellerInfoService.findByUsername(form.getUsername());
         SellerInfo sellerInfo1 = new SellerInfo();
         BeanUtils.copyProperties(sellerInfo,sellerInfo1);
         sellerInfo1.setId(form.getId());
         sellerInfoService.save(sellerInfo1);
         gzqCookie.setCookie(httpServletResponse,"isBind","1","/");
-        map.put("msg","修改成功！");
-        map.put("url","/common/sellerinfopage.html");
-        return new ModelAndView("common/success",map);
+        return "success";
     }
 
 

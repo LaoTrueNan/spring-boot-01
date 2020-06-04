@@ -17,7 +17,7 @@ $(function(){
     showRight($(".sidebar-nav li:nth-child(2)"));
     showRight($(".info_op ul li:nth-child(1)"));
 
-    $(".info_op ul li:nth-child(3)").bind('click',function () {
+    $(".info_op ul li:nth-child(2)").bind('click',function () {
     	var msg="确认退出？"
 		if(confirm(msg)==true){
 		location.href=$(this).attr("href");

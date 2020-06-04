@@ -19,6 +19,7 @@ public enum  ResultEnum {
     HFIRE_FAILED(21,"配送员操作失败"),
     FIRE_FAILED(22,"配送员有未完成订单"),
     ALREADY_EXIST(23,"类目名称重复"),
+    TYPE_EXIST(24,"类目类型重复"),
     ;
 
     private Integer code;

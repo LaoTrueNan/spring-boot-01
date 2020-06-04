@@ -38,7 +38,14 @@ $(function () {
             if($("#message1").text()=="") {
                 $("#message2").text("请填写价格！");
             }
-        }
+        }else{
+            var patrn = /^\d+(\.\d+)?$/;
+            if (!patrn.exec($(":input[name='productPrice']").val())){
+                if($("#message1").text()==""){
+                    $("#message2").text("请填写合法的价格！");
+                }
+                }
+            }
     });
 
     refocus($("input[name='productPrice']"),$("#message2"));

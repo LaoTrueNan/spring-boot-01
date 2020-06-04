@@ -3,6 +3,18 @@
     <meta charset="utf-8">
     <title></title>
     <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.0.1/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+        .gzqheader{
+            margin: 35px;
+        }
+        .gzqheader h2{
+            display: inline;
+            margin-top: 0;
+        }
+        .gzqheader img{
+            vertical-align: bottom;
+        }
+    </style>
     <script type="text/javascript" src="/jquery-3.5.0.min.js"></script>
     <script type="text/javascript" src="/jquery.cookie.js"></script>
     <script type="text/javascript" src="/js/common.js"></script>
@@ -25,6 +37,7 @@
 <div id="wrapper" class="toggled">
 <div id="page-content-wrapper">
 <div class="container">
+    <div class="gzqheader"><img src="/img/list2.png" height="30px"><h2>订单详情</h2></div>
     <div class="row clearfix">
         <span id="info" hidden="hidden">${orderDTO.orderId}</span>
         <div class="col-md-4 column">

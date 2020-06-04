@@ -32,10 +32,9 @@ li{
 }
 
 .bg{
-	/*background-image: url("/img/bg.jpg");*/
-	background: #000033;
+	background: #85b4d0;
 	z-index: -1;
-	filter: blur(3px);
+	filter: blur(2px);
 	position: absolute;
 	left: 0;
 	right: 0;
@@ -69,7 +68,7 @@ li{
 .info_op{
 	text-align: center;
 	background: #3CC4C4;
-	height: 90px;
+	height: 60px;
 	position: absolute;
 	border: #272C33;
 	border-radius: 10px;
@@ -111,9 +110,9 @@ li{
 }
 .contentbg{
 	/*background-image: url("/img/bg.jpg");*/
-		background: #000033;
+		background: #516673;
 		z-index: -1;
-		filter: blur(5px);
+		filter: blur(2px);
 		position: absolute;
 		left: 0;
 		right: 0;
@@ -125,6 +124,10 @@ li{
 	color: white;
 }
 
+.firstclass img{
+	vertical-align: bottom;
+}
+
 #main{
 	height: 700px;
 	width: 1150px;
@@ -133,9 +136,10 @@ li{
 
 .sidebar-nav .firstclass{
 	display: block;
-	width: 150px;
-	margin: 30px;
+	width: 120px;
+	margin: 45px;
 	font-size: 18px;
+	border-bottom: 2px solid #3CC4C4;
 }
 
 .sidebar-nav .firstclass:nth-child(2),
@@ -148,7 +152,11 @@ li{
 .sidebar-nav .firstclass:nth-child(3):hover,
 .sidebar-nav .firstclass:nth-child(4):hover{
 	color: red;
-	background: aqua;
+}
+
+.sidebar-nav .firstclass:nth-child(5),
+.sidebar-nav .firstclass:nth-child(6){
+	border-bottom: 2px solid #3CC4C4;
 }
 
 .caret {
@@ -182,11 +190,9 @@ li a{
 
 .firstclass li{
 	margin-top: 15px;
-	margin-left: 30px;
+	margin-left: 10px;
 	line-height: 30px;
 }
-
 iframe{
-	padding-top: 10px;
-	padding-left: 10px;
+	border-right: 2px solid #85B4D0;
 }

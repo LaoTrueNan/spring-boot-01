@@ -60,20 +60,25 @@ public class SellerCategoryController {
         String username = gzqCookie.getMyCookie(httpServletRequest,"username");
         SellerInfo sellerInfo = sellerInfoService.findByUsername(username);
         List<ProductCategory> productCategoryList = categoryService.findBySupermarket(sellerInfo.getId());
+        List<ProductCategory> productCategoryList1 = categoryService.findAll();
         List<String> categorynames = productCategoryList.stream().map(ProductCategory::getCategoryName).collect(Collectors.toList());
+        List<Integer> categorytypes = productCategoryList1.stream().map(ProductCategory::getCategoryType).collect(Collectors.toList());
         ProductCategory productCategory = new ProductCategory();
         try {
             if (form.getCategoryId() != null) {
                 productCategory = categoryService.findOne(form.getCategoryId());
-                String currentname = productCategory.getCategoryName();
-                if(!form.getCategoryName().equals(currentname) && categorynames.indexOf(form.getCategoryName())!=-1){
+                if(!form.getCategoryName().equals(productCategory.getCategoryName()) && categorynames.indexOf(form.getCategoryName())!=-1){
                     throw new SellException(ResultEnum.ALREADY_EXIST);
+                }else if(form.getCategoryType()!=productCategory.getCategoryType() && categorytypes.indexOf(form.getCategoryType())!=-1){
+                    throw new SellException(ResultEnum.TYPE_EXIST);
                 }
             }else{
                 form.setSupermarket(sellerInfo.getId());
                 BeanUtils.copyProperties(form,productCategory);
                 if(categorynames.indexOf(productCategory.getCategoryName())!=-1){
                     throw new SellException(ResultEnum.ALREADY_EXIST);
+                }else if(categorytypes.indexOf(productCategory.getCategoryType())!=-1){
+                    throw new SellException(ResultEnum.TYPE_EXIST);
                 }
             }
             categoryService.save(productCategory);
